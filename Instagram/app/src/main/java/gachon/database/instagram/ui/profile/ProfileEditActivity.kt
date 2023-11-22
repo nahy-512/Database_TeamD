@@ -1,4 +1,4 @@
-package gachon.database.instagram
+package gachon.database.instagram.ui.profile
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

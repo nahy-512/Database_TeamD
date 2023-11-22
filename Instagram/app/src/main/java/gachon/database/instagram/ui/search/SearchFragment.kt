@@ -1,22 +1,22 @@
-package gachon.database.instagram
+package gachon.database.instagram.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import gachon.database.instagram.databinding.FragmentShopBinding
+import gachon.database.instagram.databinding.FragmentSearchBinding
 
-class ShopFragment: Fragment() {
+class SearchFragment: Fragment() {
 
-    lateinit var binding: FragmentShopBinding
+    lateinit var binding: FragmentSearchBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentShopBinding.inflate(inflater, container, false)
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 

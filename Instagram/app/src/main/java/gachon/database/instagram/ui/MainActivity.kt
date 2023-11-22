@@ -1,10 +1,17 @@
-package gachon.database.instagram
+package gachon.database.instagram.ui
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import gachon.database.instagram.R
+import gachon.database.instagram.data.User
 import gachon.database.instagram.databinding.ActivityMainBinding
+import gachon.database.instagram.ui.home.HomeFragment
+import gachon.database.instagram.ui.profile.ProfileFragment
+import gachon.database.instagram.ui.reels.ReelsFragment
+import gachon.database.instagram.ui.search.SearchFragment
+import gachon.database.instagram.ui.shop.ShopFragment
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet

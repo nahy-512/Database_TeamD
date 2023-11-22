@@ -1,4 +1,4 @@
-package gachon.database.instagram
+package gachon.database.instagram.data
 
 data class User (
     val userId: Int,
