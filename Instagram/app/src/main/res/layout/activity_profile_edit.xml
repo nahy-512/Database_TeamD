@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/profile_edit_close_iv"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/ic_profile_update_close"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_edit_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="프로필 편집"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/profile_edit_close_iv"
+        app:layout_constraintBottom_toBottomOf="@id/profile_edit_close_iv"
+        app:layout_constraintStart_toEndOf="@id/profile_edit_close_iv"/>
+
+    <ImageView
+        android:id="@+id/profile_edit_save_iv"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/ic_profile_update_check"
+        app:layout_constraintTop_toTopOf="@id/profile_edit_close_iv"
+        app:layout_constraintBottom_toBottomOf="@id/profile_edit_close_iv"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/profile_edit_img_iv"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:src="@drawable/ic_profile_default"
+        android:layout_marginTop="35dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_edit_title_tv"/>
+
+    <TextView
+        android:id="@+id/profile_edit_img_change_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="프로필 사진 변경"
+        android:textStyle="bold"
+        android:textColor="@color/default_blue"
+        app:layout_constraintStart_toStartOf="@id/profile_edit_img_iv"
+        app:layout_constraintEnd_toEndOf="@id/profile_edit_img_iv"
+        app:layout_constraintTop_toBottomOf="@id/profile_edit_img_iv"/>
+
+
+    <LinearLayout
+        android:id="@+id/profile_edit_info_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="16dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/profile_edit_img_change_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:text="이름"
+            style="@style/profile_edit_info_tv" />
+
+        <EditText
+            android:id="@+id/profile_edit_name_et"
+            style="@style/profile_edit_info_et" />
+
+        <TextView
+            android:text="사용자 이름"
+            android:layout_marginTop="15dp"
+            style="@style/profile_edit_info_tv"/>
+
+        <EditText
+            android:id="@+id/profile_edit_user_name_et"
+            style="@style/profile_edit_info_et" />
+
+        <TextView
+            android:text="소개"
+            android:layout_marginTop="15dp"
+            style="@style/profile_edit_info_tv"/>
+
+        <EditText
+            android:id="@+id/profile_edit_introduction_et"
+            style="@style/profile_edit_info_et"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:text="링크 추가"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/profile_edit_info_ll"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <View style="@style/default_underline" />
+
+        <TextView
+            android:text="프로페셔널 계정으로 전환"
+            style="@style/profile_edit_button_tv" />
+
+        <View style="@style/default_underline" />
+
+        <TextView
+            android:text="아바타 만들기"
+            style="@style/profile_edit_button_tv" />
+
+        <View style="@style/default_underline" />
+
+        <TextView
+            android:text="개인정보 설정"
+            style="@style/profile_edit_button_tv" />
+
+        <View style="@style/default_underline" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
