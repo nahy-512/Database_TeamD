@@ -1,8 +1,8 @@
-package gachon.fourth.umc.android
+package gachon.database.instagram
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import gachon.third.umc.android.databinding.ActivityProfileEditBinding
+import gachon.database.instagram.databinding.ActivityProfileEditBinding
 
 class ProfileEditActivity : AppCompatActivity() {
     lateinit var binding: ActivityProfileEditBinding

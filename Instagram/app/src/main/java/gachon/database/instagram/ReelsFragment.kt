@@ -1,11 +1,11 @@
-package gachon.third.umc.android
+package gachon.database.instagram
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import gachon.third.umc.android.databinding.FragmentReelsBinding
+import gachon.database.instagram.databinding.FragmentReelsBinding
 
 class ReelsFragment: Fragment() {
 

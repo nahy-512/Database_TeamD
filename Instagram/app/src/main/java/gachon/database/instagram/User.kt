@@ -1,6 +1,4 @@
-package gachon.fourth.umc.android
-
-import java.time.LocalDateTime
+package gachon.database.instagram
 
 data class User (
     val userId: Int,

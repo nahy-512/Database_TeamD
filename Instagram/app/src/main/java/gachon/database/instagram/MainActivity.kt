@@ -1,14 +1,10 @@
-package gachon.fourth.umc.android
+package gachon.database.instagram
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import gachon.third.umc.android.ProfileFragment
-import gachon.third.umc.android.R
-import gachon.third.umc.android.ReelsFragment
-import gachon.third.umc.android.ShopFragment
-import gachon.third.umc.android.databinding.ActivityMainBinding
+import gachon.database.instagram.databinding.ActivityMainBinding
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet

@@ -1,4 +1,4 @@
-package gachon.third.umc.android
+package gachon.database.instagram
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import gachon.fourth.umc.android.ProfileEditActivity
-import gachon.third.umc.android.databinding.FragmentProfileBinding
+import gachon.database.instagram.databinding.FragmentProfileBinding
 
 class ProfileFragment: Fragment() {
 

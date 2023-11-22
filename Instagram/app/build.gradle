@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "gachon.third.umc.android"
+        applicationId "gachon.database.instagram"
         minSdk 28
         targetSdk 32
         versionCode 1
