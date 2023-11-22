@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/item_follow_profile_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_profile_default"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/item_follow_user_ll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toEndOf="@id/item_follow_profile_iv"
+        app:layout_constraintEnd_toStartOf="@id/item_follow_following_btn"
+        app:layout_constraintTop_toTopOf="@id/item_follow_profile_iv"
+        app:layout_constraintBottom_toBottomOf="@id/item_follow_profile_iv">
+
+        <TextView
+            android:id="@+id/item_follow_user_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user_name"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/item_follow_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:textColor="#777777"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_follow_follower_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="5dp"
+        android:background="@drawable/bg_button_background"
+        android:text="삭제"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_follow_profile_iv"
+        app:layout_constraintBottom_toBottomOf="@id/item_follow_profile_iv"/>
+
+    <TextView
+        android:id="@+id/item_follow_following_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="5dp"
+        android:background="@drawable/bg_button_background"
+        android:text="팔로잉"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_follow_profile_iv"
+        app:layout_constraintBottom_toBottomOf="@id/item_follow_profile_iv"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

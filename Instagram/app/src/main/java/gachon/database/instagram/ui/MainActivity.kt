@@ -27,8 +27,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 가장 처음에 표시할 Fragment 설정 -> HomeFragment
-        supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commitAllowingStateLoss()
+        // 가장 처음에 표시할 Fragment 설정 -> ProfileFragment
+        binding.mainBottomNavi.selectedItemId = R.id.profile
+        supportFragmentManager.beginTransaction().replace(R.id.main_frm, ProfileFragment()).commitAllowingStateLoss()
         // 바텀네비 아이템 클릭 이벤트 정의
         setBottomNavi()
 
