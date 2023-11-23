@@ -46,8 +46,15 @@ class ProfileFragment: Fragment() {
     }
 
     private fun moveToEditActivity() {
+        val intent = Intent(activity, ProfileEditActivity::class.java)
+
+        // 데이터 넣기
+        intent.apply {
+            this.putExtra("user_name", binding.profileUserNameTv.text.toString())
+            this.putExtra("name", binding.profileNameTv.text)
+        }
         // 화면 이동
-        startActivity(Intent(activity, ProfileEditActivity::class.java))
+        startActivity(intent)
     }
 
     private fun moveToFollowFragment(isFollower: Boolean) {

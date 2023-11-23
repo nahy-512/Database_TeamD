@@ -13,10 +13,11 @@ class ProfileEditActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        initClickListeners()
+        initClickListener()
+        setInit()
     }
 
-    private fun initClickListeners() {
+    private fun initClickListener() {
         // 닫기 버튼 클릭
         binding.profileEditCloseIv.setOnClickListener {
             finish() // 뒤로가기
@@ -25,6 +26,14 @@ class ProfileEditActivity : AppCompatActivity() {
         binding.profileEditSaveIv.setOnClickListener {
             //TODO: 프로필 편집 장태 저장
             finish()
+        }
+    }
+
+    private fun setInit() {
+        // 값 넣어주기
+        with(binding) {
+            profileEditUserNameEt.setText(intent.getStringExtra("user_name"))
+            profileEditNameEt.setText(intent.getStringExtra("name"))
         }
     }
 }
