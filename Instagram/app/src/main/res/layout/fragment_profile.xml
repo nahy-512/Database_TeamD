@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true">
 
     <TextView
@@ -194,7 +195,7 @@
             android:stateListAnimator="@null"
             android:text="프로필 공유"/>
         <ImageView
-            android:id="@+id/profile_recommend_friend_iv"
+            android:id="@+id/profile_recommend_follow_iv"
             android:layout_width="35dp"
             android:layout_height="match_parent"
             android:padding="5dp"
@@ -204,12 +205,61 @@
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profile_recommend_follow_cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@id/profile_button_ll"
+        app:layout_constraintEnd_toEndOf="@id/profile_button_ll"
+        app:layout_constraintTop_toBottomOf="@id/profile_button_ll">
+
+        <TextView
+            android:id="@+id/profile_look_user_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="사람 찾아보기"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/profile_look_user_all_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:paddingVertical="4dp"
+            android:text="모두 보기"
+            android:textSize="14sp"
+            android:textColor="@color/default_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_recommend_follow_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:scrollbars="none"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/profile_look_user_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_recommend_follow"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profile_story_highlight_cl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/profile_button_ll"
         app:layout_constraintEnd_toEndOf="@id/profile_button_ll"
-        app:layout_constraintTop_toBottomOf="@id/profile_button_ll">
+        app:layout_constraintTop_toBottomOf="@id/profile_recommend_follow_cl">
         <TextView
             android:id="@+id/profile_story_highlight_tv"
             android:layout_width="wrap_content"
@@ -218,6 +268,7 @@
             android:text="스토리 하이라이트"
             android:textSize="14sp"
             android:textColor="@color/black"
+            android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
         <ImageView
