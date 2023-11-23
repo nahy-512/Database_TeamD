@@ -6,4 +6,5 @@
     <string name="edit_password_user_name_tv">%s · Instagram</string>
     <string name="signup_finish_welcome_tv">%s님,\nInstagram에 오신 것을\n 환영합니다.</string>
     <string name="signup_finish_notice_tv">이메일 주소와 전화번호가 %s에 추가됩니다. 설정에서 언제든지 정보를 업데이트 하거나 새 정보를 입력할 수 있습니다.</string>
+    <string name="signup_finish_policy_tv">bongb.ongna의 개인 정보가 %s에 추가됩니다.\n약관.개인정보처리방침 및 쿠키정책을 확인해보세요.</string>
 </resources>
