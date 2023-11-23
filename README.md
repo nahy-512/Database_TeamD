@@ -22,14 +22,14 @@
  <tr>
     <td align="center"><a href="https://github.com/nahy-512"><img src="https://avatars.githubusercontent.com/nahy-512" width="140px;" alt=""></a></td>
     <td align="center"><a href="https://github.com/Seoljingni"><img src="https://avatars.githubusercontent.com/Seoljingni" width="140px;" alt=""></a></td>
-    <td align="center"><a href="https://github.com/"><img src="https://avatars.githubusercontent.com/" width="140px;" alt=""></a></td>
-    <td align="center"><a href="https://github.com/"><img src="https://avatars.githubusercontent.com/" width="140px;" alt=""></a></td>
+    <td align="center"><a href="https://github.com/missyou2"><img src="https://avatars.githubusercontent.com/missyou2" width="140px;" alt=""></a></td>
+    <td align="center"><a href="https://github.com/Odeng2"><img src="https://avatars.githubusercontent.com/Odeng2" width="140px;" alt=""></a></td>
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/nahy-512"><b>김나현</b></a></td>
     <td align="center"><a href="https://github.com/Seoljingni"><b>설지은</b></a></td>
-    <td align="center"><a href="https://github.com/"><b>유하연</b></a></td>
-    <td align="center"><a href="https://github.com/"><b>한희선</b></a></td>
+    <td align="center"><a href="https://github.com/missyou2"><b>유하연</b></a></td>
+    <td align="center"><a href="https://github.com/Odeng2"><b>한희선</b></a></td>
   </tr>
 </table>
 
