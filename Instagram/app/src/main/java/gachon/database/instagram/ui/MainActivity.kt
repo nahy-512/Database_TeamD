@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setBottomNavi()
 
         // DB 데이터 조회 테스트
-        dbTest2()
+//        dbTest2()
     }
 
     private fun setBottomNavi() {

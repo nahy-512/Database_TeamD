@@ -10,3 +10,9 @@ data class User (
 //    val gender: String,
 //    val introduction: String
 )
+
+data class Follow (
+    val userId: Int,
+    val userName: String,
+    val name: String
+)
