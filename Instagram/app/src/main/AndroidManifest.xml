@@ -21,6 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name="gachon.database.instagram.ui.profile.ProfileEditActivity"/>
+        <activity android:name=".ui.profile.EditPasswordActivity"
+            android:theme="@style/Theme.Transparent"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>

@@ -10,6 +10,9 @@
     <color name="transparent">#00000000</color>
 
     <color name="default_blue">#1FA1FF</color>
+    <color name="inactivate_blue">#8FBFEF</color>
+    <color name="activate_blue">#0163E0</color>
+
     <color name="default_gray">#C4C4C4</color>
     <color name="dark_gray">#555555</color>
 </resources>

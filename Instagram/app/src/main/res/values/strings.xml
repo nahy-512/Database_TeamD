@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Instagram</string>
     <string name="search">검색</string>
+    <string name="edit_password_desc_tv">누군가 액세스 권한을 얻으려고 시도 중인 경우 계정을 보호하기 위해 이 세션을 제외한 모든 세션에서 로그아웃됩니다.</string>
+    <string name="edit_password_guide_tv">비밀번호는 6자 이상이어야 하고 숫자, 영문,\n특수기호(!$@%)의 조합을 포함해야 합니다.</string>
+    <string name="edit_password_user_name_tv">%s · Instagram</string>
 </resources>
