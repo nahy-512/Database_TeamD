@@ -4,4 +4,6 @@
     <string name="edit_password_desc_tv">누군가 액세스 권한을 얻으려고 시도 중인 경우 계정을 보호하기 위해 이 세션을 제외한 모든 세션에서 로그아웃됩니다.</string>
     <string name="edit_password_guide_tv">비밀번호는 6자 이상이어야 하고 숫자, 영문,\n특수기호(!$@%)의 조합을 포함해야 합니다.</string>
     <string name="edit_password_user_name_tv">%s · Instagram</string>
+    <string name="signup_finish_welcome_tv">%s님,\nInstagram에 오신 것을\n 환영합니다.</string>
+    <string name="signup_finish_notice_tv">이메일 주소와 전화번호가 %s에 추가됩니다. 설정에서 언제든지 정보를 업데이트 하거나 새 정보를 입력할 수 있습니다.</string>
 </resources>

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Instagram">
         <activity
-            android:name="gachon.database.instagram.ui.MainActivity"
+            android:name=".ui.signup.SignupUserNameActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.signup.SignupPWActivity"/>
+        <activity android:name=".ui.signup.SignupFinishActivity"/>
+        <activity android:name=".ui.MainActivity"/>
         <activity android:name="gachon.database.instagram.ui.profile.ProfileEditActivity"/>
         <activity android:name=".ui.profile.EditPasswordActivity"
             android:theme="@style/Theme.Transparent"
