@@ -42,5 +42,8 @@ class SignupFinishActivity : AppCompatActivity() {
 
         binding.signupFinishNoticeTv.text =
             getString(R.string.signup_finish_notice_tv, intent.getStringExtra("user_name"))
+
+        binding.signupFinishPolicyTv.text =
+            getString(R.string.signup_finish_policy_tv, intent.getStringExtra("user_name"))
     }
 }

@@ -77,7 +77,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="20dp"
-        android:text="bongb.ongna의 개인 정보가 Seora에 추가됩니다.\n약관.개인정보처리방침 및 쿠키정책을 확인해보세요."
+        android:text="@string/signup_finish_policy_tv"
         android:textColor="#989898"
         android:textStyle="normal"
         android:textSize="13sp"
