@@ -6,4 +6,11 @@
     <string name="edit_password_user_name_tv">%s · Instagram</string>
     <string name="signup_finish_welcome_tv">%s님,\nInstagram에 오신 것을\n 환영합니다.</string>
     <string name="signup_finish_notice_tv">이메일 주소와 전화번호가 %s에 추가됩니다. 설정에서 언제든지 정보를 업데이트 하거나 새 정보를 입력할 수 있습니다.</string>
+
+    <!-- 로그인 및 비밀번호 화면 관련 -->
+    <string name="password">비밀번호</string>
+    <string name="current_password">현재 비밀번호</string>
+    <string name="new_password">새 비밀번호</string>
+    <string name="new_password_check">새 비밀번호 재입력</string>
+    <string name="forget_password">비밀번호를 잊으셨나요?</string>
 </resources>

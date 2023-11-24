@@ -65,7 +65,7 @@
         android:layout_marginTop="8dp"
         android:paddingVertical="5dp"
         android:backgroundTint="@color/default_blue"
-        android:background="@drawable/bg_button_background"
+        android:background="@drawable/bg_default_gray_btn"
         android:text="팔로우"
         android:textColor="@color/white"
         android:textAlignment="center"
