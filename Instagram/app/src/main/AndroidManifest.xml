@@ -23,6 +23,7 @@
         <activity android:name=".ui.signup.SignupPWActivity"/>
         <activity android:name=".ui.signup.SignupFinishActivity"/>
         <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.signup.LoginActivity"/>
         <activity android:name="gachon.database.instagram.ui.profile.ProfileEditActivity"/>
         <activity android:name=".ui.profile.EditPasswordActivity"
             android:theme="@style/Theme.Transparent"
