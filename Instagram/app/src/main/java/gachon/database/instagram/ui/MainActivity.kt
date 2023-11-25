@@ -95,9 +95,9 @@ class MainActivity : AppCompatActivity() {
 
             try {
                 Class.forName("com.mysql.jdbc.Driver")
-                val url = resources.getString(R.string.url)
-                val user = resources.getString(R.string.user)
-                val passwd = resources.getString(R.string.password)
+                val url = resources.getString(R.string.db_url)
+                val user = resources.getString(R.string.db_user)
+                val passwd = resources.getString(R.string.db_password)
                 con = DriverManager.getConnection(url, user, passwd)
                 Log.d("Database", con.toString())
             } catch (e: ClassNotFoundException) {
@@ -161,9 +161,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun connectToDatabase(): Connection? {
-        val url = resources.getString(R.string.url)
-        val user = resources.getString(R.string.user)
-        val password = resources.getString(R.string.password)
+        val url = resources.getString(R.string.db_url)
+        val user = resources.getString(R.string.db_user)
+        val password = resources.getString(R.string.db_password)
 
         return try {
             DriverManager.getConnection(url, user, password)
