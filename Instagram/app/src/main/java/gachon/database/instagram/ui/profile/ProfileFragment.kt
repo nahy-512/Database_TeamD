@@ -1,5 +1,6 @@
 package gachon.database.instagram.ui.profile
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
+import com.google.gson.JsonParseException
+import com.google.gson.reflect.TypeToken
 import gachon.database.instagram.R
 import gachon.database.instagram.data.Follow
+import gachon.database.instagram.data.LoginUser
 import gachon.database.instagram.databinding.FragmentProfileBinding
 import gachon.database.instagram.ui.MainActivity
 import gachon.database.instagram.ui.profile.follow.FollowFragment
@@ -79,7 +84,45 @@ class ProfileFragment: Fragment() {
     }
 
     private fun setInit() {
+        // 추천 친구 접기 & 펼치기
         binding.profileRecommendFollowCl.visibility = if (isShowRecommend) View.VISIBLE else View.GONE
+
+        val gson = Gson()
+        // argument에서 데이터를 꺼내기
+        val userJson = arguments?.getString("user")
+
+        // 로그인한 유저 데이터 받기
+        if (userJson != null) {
+            val user = gson.fromJson(userJson, LoginUser::class.java)
+            // 뷰에 랜더링
+            initUserInfo(user)
+        } else {
+            val spf = requireActivity().getSharedPreferences("user", Activity.MODE_PRIVATE)
+            if (spf.contains("userId")) {
+                val json = spf.getString("user", "")
+                try {
+                    // 데이터에 타입을 부여하기 위한 typeToken
+                    val typeToken = object : TypeToken<LoginUser>() {}.type
+                    // 데이터 받기
+                    val user: LoginUser = gson.fromJson(json, typeToken)
+                    // 뷰에 랜더링
+                    initUserInfo(user)
+                } catch (e: JsonParseException) { // 파싱이 안 될 경우
+                    e.printStackTrace()
+                }
+                Log.d("debug", "Data loaded")
+            }
+        }
+    }
+
+    private fun initUserInfo(user: LoginUser) {
+        Log.d("ProfileFragment", "받기: $user")
+        with(binding) {
+            profileUserNameTv.text = user.userName
+            profileNameTv.text = user.name
+            profileFollowerNumTv.text = user.followerCnt.toString()
+            profileFollowingNumTv.text = user.followingCnt.toString()
+        }
     }
 
     private fun getDatabaseData() {
