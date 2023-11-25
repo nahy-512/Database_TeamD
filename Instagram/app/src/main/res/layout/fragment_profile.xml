@@ -198,9 +198,9 @@
             android:id="@+id/profile_recommend_follow_iv"
             android:layout_width="35dp"
             android:layout_height="match_parent"
-            android:padding="5dp"
+            android:padding="8dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_recommend_friend"
+            android:src="@drawable/ic_recommend_friend_unselected"
             android:background="@drawable/bg_default_gray_btn"/>
     </LinearLayout>
 
