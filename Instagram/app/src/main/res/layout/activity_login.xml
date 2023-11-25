@@ -50,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
+            android:inputType="textPassword"
             style="@style/edit_password_et"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -58,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="@string/login"
+            android:backgroundTint="@color/activate_blue"
             style="@style/default_round_btn"/>
 
     </LinearLayout>

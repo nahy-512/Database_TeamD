@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.gson.Gson
 import gachon.database.instagram.R
 import gachon.database.instagram.data.User
 import gachon.database.instagram.databinding.ActivityMainBinding
@@ -29,7 +30,9 @@ class MainActivity : AppCompatActivity() {
 
         // 가장 처음에 표시할 Fragment 설정 -> ProfileFragment
         binding.mainBottomNavi.selectedItemId = R.id.profile
-        supportFragmentManager.beginTransaction().replace(R.id.main_frm, ProfileFragment()).commitAllowingStateLoss()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, passLoginData(ProfileFragment()))
+            .commitAllowingStateLoss()
         // 바텀네비 아이템 클릭 이벤트 정의
         setBottomNavi()
 
@@ -64,6 +67,21 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    private fun passLoginData(fragment: Fragment): Fragment {
+
+        // 데이터 받기
+        val data = intent.getStringExtra("user")
+
+        Log.d("MainActivity", "받기: $data")
+
+        // 프래그먼트에 데이터 전달
+        val bundle = Bundle()
+        bundle.putString("user", data)
+        fragment.arguments = bundle
+
+        return fragment
     }
 
     private fun setFragment(fragment: Fragment) {
