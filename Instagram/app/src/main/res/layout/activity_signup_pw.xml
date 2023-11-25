@@ -77,7 +77,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:backgroundTint="#2A87FF"
-            android:background="@drawable/bg_edit_password_btn"
+            android:background="@drawable/bg_signup_btn"
             android:stateListAnimator="@null"
             android:text="다음"
             android:textColor="@color/white"
