@@ -6,9 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import gachon.database.instagram.R
-import gachon.database.instagram.data.Follow
 import gachon.database.instagram.data.LoginUser
-import gachon.database.instagram.data.User
 import gachon.database.instagram.databinding.ActivityLoginBinding
 import gachon.database.instagram.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
@@ -142,15 +140,8 @@ class LoginActivity : AppCompatActivity() {
         val userJson = gson.toJson(user) // 템플릿 데이터 변환
 
         editor
+            .putInt("userId", user.id)
             .putString("user", userJson)
             .apply()
-
-//        // spf에 로그인한 유저 정보를 저장
-//        val spf = getSharedPreferences("user", MODE_PRIVATE)
-//        spf.edit()
-//            .putInt("userId", user.id)
-//            .putString("userName", user.userName)
-//            .putString("name", user.name)
-//            .apply()
     }
 }
