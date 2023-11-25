@@ -14,7 +14,6 @@ import gachon.database.instagram.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -29,12 +28,22 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        initClickListener()
     }
 
     override fun onStart() {
         super.onStart()
 
         setLogin()
+    }
+
+    private fun initClickListener() {
+        /* 새 계정 만들기 버튼 클릭 */
+        binding.loginMakeNewAccountBtn.setOnClickListener {
+            // 회원 가입 화면으로 이동
+            startActivity(Intent(this, SignupUserNameActivity::class.java))
+        }
     }
 
     private fun setLogin() {
