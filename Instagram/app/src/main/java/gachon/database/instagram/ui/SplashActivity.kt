@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.splash
+package gachon.database.instagram.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,8 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import gachon.database.instagram.databinding.ActivitySplashBinding
-import gachon.database.instagram.ui.MainActivity
-import gachon.database.instagram.ui.signup.LoginActivity
+import gachon.database.instagram.ui.main.MainActivity
+import gachon.database.instagram.ui.signin.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 

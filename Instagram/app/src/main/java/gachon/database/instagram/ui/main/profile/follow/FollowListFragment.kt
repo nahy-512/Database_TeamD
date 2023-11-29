@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.profile.follow
+package gachon.database.instagram.ui.main.profile.follow
 
 import android.os.Bundle
 import android.util.Log
@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import gachon.database.instagram.R
 import gachon.database.instagram.data.Follow
 import gachon.database.instagram.databinding.FragmentFollowListBinding
-import gachon.database.instagram.ui.MainActivity
-import gachon.database.instagram.ui.profile.follow.adapter.FollowRVAdapter
+import gachon.database.instagram.ui.main.MainActivity
+import gachon.database.instagram.ui.main.profile.follow.adapter.FollowRVAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

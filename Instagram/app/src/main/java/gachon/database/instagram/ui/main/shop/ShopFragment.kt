@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.shop
+package gachon.database.instagram.ui.main.shop
 
 import android.os.Bundle
 import android.view.LayoutInflater

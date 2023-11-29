@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui
+package gachon.database.instagram.ui.main
 
 import android.os.Bundle
 import android.util.Log
@@ -8,11 +8,11 @@ import com.google.gson.Gson
 import gachon.database.instagram.R
 import gachon.database.instagram.data.User
 import gachon.database.instagram.databinding.ActivityMainBinding
-import gachon.database.instagram.ui.home.HomeFragment
-import gachon.database.instagram.ui.profile.ProfileFragment
-import gachon.database.instagram.ui.reels.ReelsFragment
-import gachon.database.instagram.ui.search.SearchFragment
-import gachon.database.instagram.ui.shop.ShopFragment
+import gachon.database.instagram.ui.main.home.HomeFragment
+import gachon.database.instagram.ui.main.profile.ProfileFragment
+import gachon.database.instagram.ui.main.reels.ReelsFragment
+import gachon.database.instagram.ui.main.search.SearchFragment
+import gachon.database.instagram.ui.main.shop.ShopFragment
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet

@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.profile
+package gachon.database.instagram.ui.main.profile
 
 import android.app.Activity
 import android.content.Intent
@@ -16,9 +16,9 @@ import gachon.database.instagram.R
 import gachon.database.instagram.data.Follow
 import gachon.database.instagram.data.LoginUser
 import gachon.database.instagram.databinding.FragmentProfileBinding
-import gachon.database.instagram.ui.MainActivity
-import gachon.database.instagram.ui.profile.follow.FollowFragment
-import gachon.database.instagram.ui.profile.follow.adapter.RecommendFollowRVAdapter
+import gachon.database.instagram.ui.main.MainActivity
+import gachon.database.instagram.ui.main.profile.follow.FollowFragment
+import gachon.database.instagram.ui.main.profile.follow.adapter.RecommendFollowRVAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

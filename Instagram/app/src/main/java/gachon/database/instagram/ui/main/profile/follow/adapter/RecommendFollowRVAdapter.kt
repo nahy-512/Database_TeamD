@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.profile.follow.adapter
+package gachon.database.instagram.ui.main.profile.follow.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -20,13 +20,13 @@ class RecommendFollowRVAdapter : RecyclerView.Adapter<RecommendFollowRVAdapter.V
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecommendFollowRVAdapter.ViewHolder {
+    ): ViewHolder {
         val binding: ItemRecommendFollowBinding = ItemRecommendFollowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecommendFollowRVAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(users[position])
     }
 
