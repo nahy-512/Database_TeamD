@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.profile
+package gachon.database.instagram.ui.main.profile
 
 import android.app.Activity
 import android.content.Intent
@@ -16,9 +16,9 @@ import gachon.database.instagram.R
 import gachon.database.instagram.data.Follow
 import gachon.database.instagram.data.LoginUser
 import gachon.database.instagram.databinding.FragmentProfileBinding
-import gachon.database.instagram.ui.MainActivity
-import gachon.database.instagram.ui.profile.follow.FollowFragment
-import gachon.database.instagram.ui.profile.follow.adapter.RecommendFollowRVAdapter
+import gachon.database.instagram.ui.main.MainActivity
+import gachon.database.instagram.ui.main.profile.follow.FollowFragment
+import gachon.database.instagram.ui.main.profile.follow.adapter.RecommendFollowRVAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -72,11 +72,12 @@ class ProfileFragment: Fragment() {
         }
 
         binding.profileRecommendFollowIv.setOnClickListener {
-            //TODO: 이미지 변경
             if (isShowRecommend) { // 펼쳐진 상태
                 binding.profileRecommendFollowCl.visibility = View.GONE
+                binding.profileRecommendFollowIv.setImageResource(R.drawable.ic_recommend_friend_unselected)
             } else { // 닫혀있는 상태
                 binding.profileRecommendFollowCl.visibility = View.VISIBLE
+                binding.profileRecommendFollowIv.setImageResource(R.drawable.ic_recommend_friend_selected)
             }
             // 접힘 상태 업데이트
             isShowRecommend = !isShowRecommend

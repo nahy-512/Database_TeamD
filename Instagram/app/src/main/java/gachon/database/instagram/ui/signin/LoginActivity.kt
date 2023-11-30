@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.signup
+package gachon.database.instagram.ui.signin
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,8 @@ import com.google.gson.Gson
 import gachon.database.instagram.R
 import gachon.database.instagram.data.LoginUser
 import gachon.database.instagram.databinding.ActivityLoginBinding
-import gachon.database.instagram.ui.MainActivity
+import gachon.database.instagram.ui.main.MainActivity
+import gachon.database.instagram.ui.signup.SignupUserNameActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

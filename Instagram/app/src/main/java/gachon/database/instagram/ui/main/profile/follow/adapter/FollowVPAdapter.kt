@@ -1,8 +1,8 @@
-package gachon.database.instagram.ui.profile.follow.adapter
+package gachon.database.instagram.ui.main.profile.follow.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import gachon.database.instagram.ui.profile.follow.FollowListFragment
+import gachon.database.instagram.ui.main.profile.follow.FollowListFragment
 
 class FollowVPAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 2

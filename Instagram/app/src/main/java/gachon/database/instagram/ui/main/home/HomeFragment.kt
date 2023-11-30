@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.home
+package gachon.database.instagram.ui.main.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

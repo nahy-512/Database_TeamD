@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.profile
+package gachon.database.instagram.ui.main.profile
 
 import android.content.Intent
 import android.os.Bundle

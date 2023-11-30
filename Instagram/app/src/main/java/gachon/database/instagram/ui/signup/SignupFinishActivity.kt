@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import gachon.database.instagram.R
 import gachon.database.instagram.databinding.ActivitySignupFinishBinding
-import gachon.database.instagram.ui.MainActivity
+import gachon.database.instagram.ui.main.MainActivity
 
 class SignupFinishActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupFinishBinding
