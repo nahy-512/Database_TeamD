@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.profile.follow
+package gachon.database.instagram.ui.main.profile.follow
 
 import android.os.Bundle
 import android.util.Log
@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import gachon.database.instagram.R
 import gachon.database.instagram.data.Follow
 import gachon.database.instagram.databinding.FragmentFollowListBinding
-import gachon.database.instagram.ui.MainActivity
-import gachon.database.instagram.ui.profile.follow.adapter.FollowRVAdapter
+import gachon.database.instagram.ui.main.MainActivity
+import gachon.database.instagram.ui.main.profile.follow.adapter.FollowRVAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -94,7 +94,7 @@ class FollowListFragment: Fragment() {
         val targetId = if (isFollower) "follower_id" else "following_id" // 조회 대상이 되는 유저의 id
         val table = if (isFollower) "follower" else "following" // 조회할 테이블
         val userId = getUserId() // 현재 로그인된 유저 아이디
-        val sql = String.format(resources.getString(R.string.get_follow_list), targetId, table, userId)
+        val sql = String.format(resources.getString(R.string.query_select_follow_list), targetId, table, userId)
 
         return try {
             // Statement 객체를 생성하여 SQL 쿼리를 실행하기 위한 준비를 함

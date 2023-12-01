@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
+import gachon.database.instagram.ui.main.MainActivity
 
 class SignupFinishActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupFinishBinding

@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.profile.follow
+package gachon.database.instagram.ui.main.profile.follow
 
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayoutMediator
 import gachon.database.instagram.databinding.FragmentFollowBinding
-import gachon.database.instagram.ui.MainActivity
-import gachon.database.instagram.ui.profile.follow.adapter.FollowVPAdapter
+import gachon.database.instagram.ui.main.MainActivity
+import gachon.database.instagram.ui.main.profile.follow.adapter.FollowVPAdapter
 
 class FollowFragment: Fragment() {
 

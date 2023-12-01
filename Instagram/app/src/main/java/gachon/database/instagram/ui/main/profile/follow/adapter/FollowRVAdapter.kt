@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.profile.follow.adapter
+package gachon.database.instagram.ui.main.profile.follow.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,13 +19,13 @@ class FollowRVAdapter(val isFollower: Boolean) : RecyclerView.Adapter<FollowRVAd
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowRVAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemFollowBinding = ItemFollowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: FollowRVAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(users[position])
         Log.d("bori", "$position + ${users[position]}")
         //TODO: 클릭했을 떄 버튼 색 바꿔주기 + 팔로워 삭제 또는 팔로잉 취소 구현

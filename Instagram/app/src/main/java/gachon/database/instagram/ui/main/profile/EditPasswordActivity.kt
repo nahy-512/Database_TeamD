@@ -1,4 +1,4 @@
-package gachon.database.instagram.ui.profile
+package gachon.database.instagram.ui.main.profile
 
 import android.os.Bundle
 import android.util.Log
@@ -50,9 +50,9 @@ class EditPasswordActivity : AppCompatActivity() {
     }
 
     fun connectToDatabase(): Connection? {
-        val url = resources.getString(R.string.url)
-        val user = resources.getString(R.string.user)
-        val password = resources.getString(R.string.password)
+        val url = resources.getString(R.string.db_url)
+        val user = resources.getString(R.string.db_user)
+        val password = resources.getString(R.string.db_password)
 
         return try {
             DriverManager.getConnection(url, user, password)
@@ -94,7 +94,7 @@ class EditPasswordActivity : AppCompatActivity() {
         val currentPwd = binding.editPasswordCurrentPwdEt.text
         val newPwd = binding.editPasswordNewPwdEt.text
 
-        val sql = getString(R.string.update_password, newPwd, currentPwd, getUserId())
+        val sql = getString(R.string.query_update_password, newPwd, currentPwd, getUserId())
 
         try {
             val statement = connection.createStatement()

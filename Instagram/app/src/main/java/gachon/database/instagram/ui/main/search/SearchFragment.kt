@@ -1,22 +1,22 @@
-package gachon.database.instagram.ui.reels
+package gachon.database.instagram.ui.main.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import gachon.database.instagram.databinding.FragmentReelsBinding
+import gachon.database.instagram.databinding.FragmentSearchBinding
 
-class ReelsFragment: Fragment() {
+class SearchFragment: Fragment() {
 
-    lateinit var binding: FragmentReelsBinding
+    lateinit var binding: FragmentSearchBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentReelsBinding.inflate(inflater, container, false)
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 

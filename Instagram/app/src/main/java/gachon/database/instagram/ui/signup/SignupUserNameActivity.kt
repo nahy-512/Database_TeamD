@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import gachon.database.instagram.R
 import gachon.database.instagram.databinding.ActivitySignupUserNameBinding
-import gachon.database.instagram.ui.profile.EditPasswordActivity
+import gachon.database.instagram.ui.main.profile.EditPasswordActivity
 
 class SignupUserNameActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupUserNameBinding

@@ -1,17 +1,18 @@
-package gachon.database.instagram.ui
+package gachon.database.instagram.ui.main
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.gson.Gson
 import gachon.database.instagram.R
 import gachon.database.instagram.data.User
 import gachon.database.instagram.databinding.ActivityMainBinding
-import gachon.database.instagram.ui.home.HomeFragment
-import gachon.database.instagram.ui.profile.ProfileFragment
-import gachon.database.instagram.ui.reels.ReelsFragment
-import gachon.database.instagram.ui.search.SearchFragment
-import gachon.database.instagram.ui.shop.ShopFragment
+import gachon.database.instagram.ui.main.home.HomeFragment
+import gachon.database.instagram.ui.main.profile.ProfileFragment
+import gachon.database.instagram.ui.main.reels.ReelsFragment
+import gachon.database.instagram.ui.main.search.SearchFragment
+import gachon.database.instagram.ui.main.shop.ShopFragment
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
@@ -29,7 +30,9 @@ class MainActivity : AppCompatActivity() {
 
         // 가장 처음에 표시할 Fragment 설정 -> ProfileFragment
         binding.mainBottomNavi.selectedItemId = R.id.profile
-        supportFragmentManager.beginTransaction().replace(R.id.main_frm, ProfileFragment()).commitAllowingStateLoss()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, passLoginData(ProfileFragment()))
+            .commitAllowingStateLoss()
         // 바텀네비 아이템 클릭 이벤트 정의
         setBottomNavi()
 
@@ -66,6 +69,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun passLoginData(fragment: Fragment): Fragment {
+
+        // 데이터 받기
+        val data = intent.getStringExtra("user")
+
+        Log.d("MainActivity", "받기: $data")
+
+        // 프래그먼트에 데이터 전달
+        val bundle = Bundle()
+        bundle.putString("user", data)
+        fragment.arguments = bundle
+
+        return fragment
+    }
+
     private fun setFragment(fragment: Fragment) {
         // 이동할 Fragment 지정
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, fragment).commit()
@@ -77,9 +95,9 @@ class MainActivity : AppCompatActivity() {
 
             try {
                 Class.forName("com.mysql.jdbc.Driver")
-                val url = resources.getString(R.string.url)
-                val user = resources.getString(R.string.user)
-                val passwd = resources.getString(R.string.password)
+                val url = resources.getString(R.string.db_url)
+                val user = resources.getString(R.string.db_user)
+                val passwd = resources.getString(R.string.db_password)
                 con = DriverManager.getConnection(url, user, passwd)
                 Log.d("Database", con.toString())
             } catch (e: ClassNotFoundException) {
@@ -143,9 +161,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun connectToDatabase(): Connection? {
-        val url = resources.getString(R.string.url)
-        val user = resources.getString(R.string.user)
-        val password = resources.getString(R.string.password)
+        val url = resources.getString(R.string.db_url)
+        val user = resources.getString(R.string.db_user)
+        val password = resources.getString(R.string.db_password)
 
         return try {
             DriverManager.getConnection(url, user, password)
