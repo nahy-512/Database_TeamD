@@ -20,8 +20,7 @@
             android:layout_marginTop="50dp"
             android:text="비밀번호 만들기"
             android:textColor="@color/black"
-            android:textStyle="bold
-"
+            android:textStyle="bold"
             android:textSize="30sp"/>
 
         <TextView

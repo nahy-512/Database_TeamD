@@ -4,4 +4,6 @@
     <string name="get_follow_list">SELECT user_id, user_name, name FROM user WHERE user_id IN (SELECT %1$s FROM %2$s WHERE user_id = %3$d)</string>
     // 비밀번호 변경
     <string name="update_password">UPDATE user SET password = \'%1$s\' WHERE password = \'%2$s\' AND user_id = %3$d;</string>
+    // 회원가입
+    <string name="insert_data">INSERT into user(user_name, password) VALUES (\'%1$s\', \'%2$s\')</string>
 </resources>
