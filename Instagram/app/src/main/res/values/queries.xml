@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     // 회원가입
-    <string name="query_insert_signup_user">INSERT into user(user_name, password) VALUES (\'%1$s\', \'%2$s\')</string>
-    // 로그인 유저 정보 조회
-    <string name="query_select_login_user">select u.user_id, u.user_name, u.name,
-(select count(*) from following where user_id = u.user_id) as following_count,
-(select count(*) from follower where user_id = u.user_id) as follower_count
-from user u
-where u.user_name = \'%1$s\' and u.password = \'%2$s\'</string>
+    <string name="query_insert_signup_user">INSERT INTO user(user_name, password) VALUES (\'%1$s\', \'%2$s\')</string>
+    // 로그인으로 유저 정보 조회하기 (사용자 이름, 비밀번호 입력)
+    <string name="query_select_login_user">SELECT u.user_id, u.user_name, u.name,
+(SELECT count(*) FROM following WHERE user_id = u.user_id) AS following_count,
+(SELECT count(*) FROM follower WHERE user_id = u.user_id) AS follower_count
+FROM user u
+WHERE u.user_name = \'%1$s\' AND u.password = \'%2$s\'</string>
     // 팔로워, 팔로잉 목록 조회
     <string name="query_select_follow_list">SELECT user_id, user_name, name FROM user WHERE user_id IN (SELECT %1$s FROM %2$s WHERE user_id = %3$d)</string>
     // 비밀번호 변경
