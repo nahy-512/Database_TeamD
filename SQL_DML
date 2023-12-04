@@ -13,8 +13,8 @@ select count(*) as following_count from following where user_id=2;
 select count(*) as follower_count from follower where user_id=2;
 
 
-# 입력받은 user_name과 password가 일치하면 해당 user의 user_name, name, following수, follower수를 출력하기
-select u.user_name, u.name,
+# 입력받은 user_name과 password가 일치하면 해당 user의 user_id, user_name, name, following수, follower수를 출력하기
+select u.user_id, u.user_name, u.name,
 (select count(*) from following where user_id = u.user_id) as following_count,
 (select count(*) from follower where user_id = u.user_id) as follower_count
 from user u
