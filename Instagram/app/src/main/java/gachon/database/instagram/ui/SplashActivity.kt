@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val handler = Handler(Looper.getMainLooper())
-
+        
         handler.postDelayed({
             // 자동로그인
             autoLogin()
@@ -30,12 +30,16 @@ class SplashActivity : AppCompatActivity() {
 
     private fun autoLogin() {
         if (getJwt() != 0) { // 유저 로그인 정보가 있으면 메인 액티비티로
-            startActivity(Intent(this, MainActivity::class.java))
+            moveToNextActivity(MainActivity::class.java)
         } else { // 없다면 로그인 액티비티로
-            startActivity(Intent(this, LoginActivity::class.java))
+            moveToNextActivity(LoginActivity::class.java)
         }
         // 스플래시는 종료
         finish()
+    }
+
+    private fun moveToNextActivity(nextActivity: Class<*>) {
+        startActivity(Intent(this, nextActivity))
     }
 
     private fun getJwt(): Int {

@@ -3,17 +3,17 @@ package gachon.database.instagram.ui.signup
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import gachon.database.instagram.R
 import gachon.database.instagram.databinding.ActivitySignupFinishBinding
-import gachon.database.instagram.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
-import gachon.database.instagram.ui.main.MainActivity
+import gachon.database.instagram.ui.signin.LoginActivity
 
 class SignupFinishActivity : AppCompatActivity() {
     lateinit var binding: ActivitySignupFinishBinding
@@ -34,14 +34,17 @@ class SignupFinishActivity : AppCompatActivity() {
     private fun initClickListener() {
         // 개인정보 설정
         binding.signupFinishNextBtn.setOnClickListener {
-            val nextIntent = Intent(this, MainActivity::class.java)
+            val nextIntent = Intent(this, LoginActivity::class.java)
             userName = intent.getStringExtra("user_name").toString()
             password = intent.getStringExtra("password").toString()
             nextIntent.putExtra("user_name", userName)
             nextIntent.putExtra("password", password)
             insertDatabaseData()
             // 화면 이동
+            Toast.makeText(this, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
             startActivity(nextIntent)
+            // 스택에 쌓여있는 회원가입 액티비티들을 모두 종료
+            finishAffinity()
         }
     }
 
@@ -58,9 +61,9 @@ class SignupFinishActivity : AppCompatActivity() {
 
 
     fun connectToDatabase(): Connection? {
-        val url = resources.getString(R.string.url)
-        val user = resources.getString(R.string.user)
-        val password = resources.getString(R.string.password)
+        val url = resources.getString(R.string.db_url)
+        val user = resources.getString(R.string.db_user)
+        val password = resources.getString(R.string.db_password)
 
         return try {
             DriverManager.getConnection(url, user, password)
@@ -89,15 +92,13 @@ class SignupFinishActivity : AppCompatActivity() {
 
     private fun insertUserData(connection: Connection) {
 
-        val sql = getString(R.string.insert_data, userName, password);
+        val sql = getString(R.string.query_insert_signup_user, userName, password);
 
         try {
             val statement = connection.createStatement()
             val resultSet = statement.executeUpdate(sql)
 
             Log.d("SignupFinishActivity", "회원가입 성공")
-            // 종료
-            finish()
         } catch (e: SQLException) {
             println("An error occurred while executing the SQL query: $sql")
             println(e.message)
