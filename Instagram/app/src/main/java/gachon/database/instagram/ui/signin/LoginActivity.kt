@@ -79,6 +79,7 @@ class LoginActivity : AppCompatActivity() {
         Log.d("LoginActivity", "넘기기: $user")
         // 화면 이동
         startActivity(intent)
+        finish()
     }
 
     private fun getDatabaseData() {

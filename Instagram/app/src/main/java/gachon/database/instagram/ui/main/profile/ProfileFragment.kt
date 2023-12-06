@@ -8,10 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
-import com.google.gson.JsonParseException
-import com.google.gson.reflect.TypeToken
 import gachon.database.instagram.R
 import gachon.database.instagram.data.Follow
 import gachon.database.instagram.data.LoginUser
@@ -24,12 +21,15 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.sql.Connection
+import java.sql.DriverManager
 import java.sql.SQLException
 
 class ProfileFragment: Fragment() {
 
     lateinit var binding: FragmentProfileBinding
     private lateinit var adapter: RecommendFollowRVAdapter
+
+    private var userId: Int = 0
 
     private var isShowRecommend = false
     private var recommends = ArrayList<Follow>()
@@ -88,31 +88,18 @@ class ProfileFragment: Fragment() {
         // 추천 친구 접기 & 펼치기
         binding.profileRecommendFollowCl.visibility = if (isShowRecommend) View.VISIBLE else View.GONE
 
+        userId = requireActivity().getSharedPreferences("user", Activity.MODE_PRIVATE).getInt("userId", 2)
+
         val gson = Gson()
         // argument에서 데이터를 꺼내기
         val userJson = arguments?.getString("user")
 
-        // 로그인한 유저 데이터 받기
+        // 로그인한 유저 데이터 받기 (MainActivity에서 받아온 정보)
         if (userJson != null) {
             val user = gson.fromJson(userJson, LoginUser::class.java)
+            userId = user.id
             // 뷰에 랜더링
             initUserInfo(user)
-        } else {
-            val spf = requireActivity().getSharedPreferences("user", Activity.MODE_PRIVATE)
-            if (spf.contains("userId")) {
-                val json = spf.getString("user", "")
-                try {
-                    // 데이터에 타입을 부여하기 위한 typeToken
-                    val typeToken = object : TypeToken<LoginUser>() {}.type
-                    // 데이터 받기
-                    val user: LoginUser = gson.fromJson(json, typeToken)
-                    // 뷰에 랜더링
-                    initUserInfo(user)
-                } catch (e: JsonParseException) { // 파싱이 안 될 경우
-                    e.printStackTrace()
-                }
-                Log.d("debug", "Data loaded")
-            }
         }
     }
 
@@ -126,74 +113,62 @@ class ProfileFragment: Fragment() {
         }
     }
 
+    fun connectToDatabase(): Connection? {
+        val url = resources.getString(R.string.db_url)
+        val user = resources.getString(R.string.db_user)
+        val password = resources.getString(R.string.db_password)
+
+        return try {
+            DriverManager.getConnection(url, user, password)
+        } catch (e: SQLException) {
+            null
+        }
+    }
+
     private fun getDatabaseData() {
         GlobalScope.launch(Dispatchers.IO) {
-            if (activity is MainActivity) {
-                val activity = activity as MainActivity
-                val connection = activity.connectToDatabase()
 
-                if (connection != null) {
-                    connection.use { connection ->
-                        // DB에서 조회한 팔로워 or 팔로잉 정보를 리스트로 가져오기
-                        val users = getAllFollowList(connection)
+            connectToDatabase()?.use { connection ->
+                // userId를 통해 조회한 유저 정보를 가져옴
+                val userInfo = getUserInfoById(connection)
 
-                        // UI 업데이트를 메인 스레드에서 수행
-                        withContext(Dispatchers.Main) {
-                            recommends.clear()
-                            recommends.addAll(users)
-
-                            // 팔로워 or 팔로잉 리스트로 리사이클러뷰 데이터 초기화
-                            initRecommendRV()
-                        }
-                    }
-                } else {
-                    Log.d("Database", "Failed to connect to the database.")
+                // UI 업데이트를 메인 스레드에서 수행
+                withContext(Dispatchers.Main) {
+                    // 가져온 정보로 뷰를 업데이트
+                    userInfo?.let { initUserInfo(it) }
                 }
             }
         }
     }
 
-    fun getAllFollowList(connection: Connection): List<Follow> {
-        //TODO: 내가 팔로잉하지 않는 유저를 추천받아서 조회
-        val query = "SELECT * FROM user"
+    fun getUserInfoById(connection: Connection): LoginUser? {
+
+        // 쿼리 작성
+        val sql = String.format(resources.getString(R.string.query_select_user_by_userId), userId)
 
         return try {
             // Statement 객체를 생성하여 SQL 쿼리를 실행하기 위한 준비를 함
             val statement = connection.createStatement()
             // SQL SELECT 쿼리를 실행하고, 조회 결과를 테이블 형식의 데이터인 ResultSet 객체에 저장함
-            val resultSet = statement.executeQuery(query)
+            val resultSet = statement.executeQuery(sql)
 
-            // 조회 결과를 반환할 리스트 (추천 유저 목록)
-            val recommends = ArrayList<Follow>()
-
+            var user = LoginUser(userId, "", "", 0, 0)
             while (resultSet.next()) { // 조회 결과를 한줄 한줄 받아옴
-                val id = resultSet.getInt("user_id")
                 val userName = resultSet.getString("user_name")
                 val name = resultSet.getString("name")
-                // 한 유저 인스턴스에 받아온 필드를 차례대로 넣어줌
-                val user = Follow(id, userName, name)
-                // 리스트에 위에서 받아온 유저 정보를 추가해줌
-                recommends.add(user)
+                val followingNum = resultSet.getInt("following_count")
+                val followerNum = resultSet.getInt("follower_count")
+                user = LoginUser(userId, userName, name, followerNum, followingNum)
+                Log.d("ProfileFrag", "로그인 한 유저 정보: $user")
             }
-            // DB에서 조회한 추천 유저 리스트를 반환
-            recommends
+
+            user
         } catch (e: SQLException) {
-            println("An error occurred while executing the SQL query: $query")
+            println("An error occurred while executing the SQL query: $sql")
             println(e.message)
 
-            ArrayList()
+            return null
         }
-    }
-
-    private fun initRecommendRV() {
-        // 리사이클러뷰 연결
-        adapter = RecommendFollowRVAdapter()
-        binding.profileRecommendFollowRv.adapter = adapter
-        binding.profileRecommendFollowRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        // 쿼리문으로 조회한 팔로워 or 팔로잉 리스트를 리사이클러뷰에 집어넣기
-        Log.d("ProfileFragment", "From database: $recommends")
-        adapter.addRecommendList(recommends)
     }
 
     private fun moveToEditActivity() {
