@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -126,7 +127,7 @@ class FollowListFragment: Fragment() {
 
     private fun initFollowRv() {
         // 리사이클러뷰 연결
-        adapter = FollowRVAdapter(isFollower)
+        adapter = FollowRVAdapter(requireContext(), isFollower)
         binding.followListRv.adapter = adapter
         binding.followListRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
@@ -134,7 +135,14 @@ class FollowListFragment: Fragment() {
         Log.d("FollowListFragment", "From database: $follows")
         adapter.addFollows(follows)
 
-        //TODO: 아이템 버튼 클릭 시 팔로워 삭제 or 팔로잉 취소 구현
+        // 아이템 버튼 클릭 동작 -> 팔로워 삭제 or 팔로잉 취소
+        adapter.setMyItemClickListener(object : FollowRVAdapter.MyItemClickListener {
+            override fun onClickBtn(follow: Follow) {
+                val followString = if (isFollower) "팔로워" else "팔로잉"
+                //TODO: 팔로잉, 팔로우 취소 DB insert 구현
+                Toast.makeText(requireContext(), "$followString 탭 - ${follow.userName}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun getUserId(): Int {
