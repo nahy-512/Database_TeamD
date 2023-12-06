@@ -146,6 +146,13 @@
 
             <View style="@style/default_underline" />
 
+            <TextView
+                android:id="@+id/profile_edit_logout_tv"
+                android:text="로그아웃"
+                style="@style/profile_edit_button_tv" />
+
+            <View style="@style/default_underline" />
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

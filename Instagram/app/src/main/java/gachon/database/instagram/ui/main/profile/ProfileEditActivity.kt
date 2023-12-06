@@ -2,8 +2,11 @@ package gachon.database.instagram.ui.main.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import gachon.database.instagram.databinding.ActivityProfileEditBinding
+import gachon.database.instagram.ui.signin.LoginActivity
+import kotlin.math.log
 
 class ProfileEditActivity : AppCompatActivity() {
     lateinit var binding: ActivityProfileEditBinding
@@ -39,6 +42,11 @@ class ProfileEditActivity : AppCompatActivity() {
             // 화면 이동
             startActivity(intent)
         }
+
+        // 로그아웃
+        binding.profileEditLogoutTv.setOnClickListener {
+            logout()
+        }
     }
 
     private fun setInit() {
@@ -48,5 +56,16 @@ class ProfileEditActivity : AppCompatActivity() {
             profileEditUserNameEt.setText(userName)
             profileEditNameEt.setText(intent.getStringExtra("name"))
         }
+    }
+
+    private fun logout() {
+        // 토큰 비우기 (user_id)
+        getSharedPreferences("user", MODE_PRIVATE).edit().clear().apply()
+        // 로그아웃 토스트 출력
+        Toast.makeText(this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show()
+        // 로그인 화면으로 이동하기
+        startActivity(Intent(this, LoginActivity::class.java))
+        // 스택에 쌓여있는 액티비티들을 모두 종료 (메인, 프로필 편집)
+        finishAffinity()
     }
 }
