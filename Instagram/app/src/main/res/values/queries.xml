@@ -19,6 +19,9 @@ WHERE u.user_id = %d;</string>
     // 팔로워 삭제
     <string name="query_delete_follower_my">DELETE FROM follower WHERE user_id = %1$d AND follower_id = %2$d;</string>
     <string name="query_delete_follower_other">DELETE FROM following WHERE user_id = %2$d AND following_id = %1$d;</string>
+    // 팔로잉 취소
+    <string name="query_delete_following_my">DELETE FROM following WHERE user_id = %1$d AND following_id = %2$d;</string>
+    <string name="query_delete_following_other">DELETE FROM following WHERE user_id = %2$d AND following_id = %1$d;</string>
 
     // 비밀번호 변경
     <string name="query_update_password">UPDATE user SET password = \'%1$s\' WHERE password = \'%2$s\' AND user_id = %3$d;</string>

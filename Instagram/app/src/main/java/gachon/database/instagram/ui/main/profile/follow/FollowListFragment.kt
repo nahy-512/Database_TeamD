@@ -132,20 +132,29 @@ class FollowListFragment: Fragment() {
         }
     }
 
-    private fun onClickFollowDeleteBtn(follow: Follow) {
+    private fun onClickFollowDeleteBtn(follow: Follow, isFollowing: Boolean) {
         GlobalScope.launch(Dispatchers.IO) {
             val connection = connectToDatabase()
-
             if (connection != null) {
-                deleteFollower(connection, follow.userId) { success ->
-                    if (success) {
-                        // 삭제 성공 시 토스트 메시지 표시
-                        Log.d("FollowListFrag", "팔로우 삭제 성공")
-                    } else {
-                        // 삭제 실패 시 토스트 메시지 표시
+                if (isFollowing) { // 팔로워 삭제
+                    deleteFollower(connection, follow.userId) { success ->
+                        if (success) {
+                            //TODO: 삭제 성공 시 토스트 메시지 표시
+
+                            // 일단 로그 출력
+                            Log.d("FollowListFrag", "팔로워 삭제 성공, user_name: ${follow.userName}")
+                        }
+                        // 연결 닫기
+                        connection.close()
                     }
-                    // 연결 닫기
-                    connection.close()
+                } else { // 팔로잉 취소
+                    cancelFollowing(connection, follow.userId) { success ->
+                        if (success) {
+                            Log.d("FollowListFrag", "팔로잉 취소 성공, user_name: ${follow.userName}")
+                        }
+                        // 연결 닫기
+                        connection.close()
+                    }
                 }
             } else {
                 Log.d("Database", "Failed to connect to the database.")
@@ -153,7 +162,7 @@ class FollowListFragment: Fragment() {
         }
     }
 
-    private fun deleteFollower(connection: Connection, followerId: Int, onDeleted: (Boolean) -> Unit) {
+    private fun deleteFollower(connection: Connection, followerId: Int, onSuccess: (Boolean) -> Unit) {
         // 나를 팔로워하는 사람 삭제 (나의 팔로워)
         val sql_my = String.format(resources.getString(R.string.query_delete_follower_my), userId, followerId)
         // 그 사람의 팔로잉에서 나를 삭제
@@ -168,19 +177,35 @@ class FollowListFragment: Fragment() {
             val rowsAffectedOther = statement.executeUpdate(sql_other)
 
             // 양쪽 모두에서 영향을 받은 행(row)이 존재하면 성공으로 간주
-            val success = rowsAffectedMy > 0 && rowsAffectedOther > 0
-            if (success) {
-                //TODO: 삭제 성공 시 -> "삭제됨" 토스트 메시지 표시
-                onDeleted(true)
-            } else {
-                // 삭제 실패
-                onDeleted(false)
-            }
+            onSuccess(rowsAffectedMy > 0 && rowsAffectedOther > 0)
         } catch (e: SQLException) {
             println("An error occurred while executing the SQL query: \n$sql_my\n$sql_other")
             println(e.message)
             // 삭제 실패
-            onDeleted(false)
+            onSuccess(false)
+        }
+    }
+
+    private fun cancelFollowing(connection: Connection, followingId: Int, onSuccess: (Boolean) -> Unit) {
+        // 내가 팔로잉을 취소
+        val sql_my = String.format(resources.getString(R.string.query_delete_following_my), userId, followingId)
+        // 그 사람의 팔로워에서 나를 삭제
+        val sql_other = String.format(resources.getString(R.string.query_delete_following_other), userId, followingId)
+
+        try {
+            val statement = connection.createStatement()
+
+            // 첫 번째 DELETE 쿼리 실행
+            val rowsAffectedMy = statement.executeUpdate(sql_my)
+            // 두 번째 DELETE 쿼리 실행
+            val rowsAffectedOther = statement.executeUpdate(sql_other)
+
+            // 양쪽 모두에서 영향을 받은 행(row)이 존재하면 성공으로 간주
+            onSuccess(rowsAffectedMy > 0 && rowsAffectedOther > 0)
+        } catch (e: SQLException) {
+            println("An error occurred while executing the SQL query: \n$sql_my\n$sql_other")
+            println(e.message)
+            onSuccess(false)
         }
     }
 
@@ -198,11 +223,9 @@ class FollowListFragment: Fragment() {
         adapter.setMyItemClickListener(object : FollowRVAdapter.MyItemClickListener {
             override fun onClickBtn(follow: Follow) {
                 val followString = if (isFollower) "팔로워" else "팔로잉"
-                //TODO: 팔로잉, 팔로우 취소 DB insert 구현
+                //TODO: 팔로잉, 팔로우 취소 DB delete 구현
 //                Toast.makeText(requireContext(), "$followString 탭 - ${follow.userName}", Toast.LENGTH_SHORT).show()
-                if (isFollower) { // 팔로워 삭제 진행
-                    onClickFollowDeleteBtn(follow)
-                }
+                onClickFollowDeleteBtn(follow, isFollower)
             }
         })
     }
