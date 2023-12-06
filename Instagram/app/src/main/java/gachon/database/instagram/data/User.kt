@@ -14,7 +14,7 @@ data class User (
 data class LoginUser(
     val id: Int,
     val userName: String,
-    val name: String,
+    val name: String?,
     val followerCnt: Int,
     val followingCnt: Int
 )
