@@ -68,29 +68,32 @@ class FollowListFragment: Fragment() {
         userId = getUserId()
     }
 
+    private fun connectToDatabase(): Connection? {
+        if (activity is MainActivity) {
+            val activity = activity as MainActivity
+            return activity.connectToDatabase()
+        }
+        return null
+    }
+
     private fun getDatabaseData() {
         GlobalScope.launch(Dispatchers.IO) {
-            if (activity is MainActivity) {
-                val activity = activity as MainActivity
-                val connection = activity.connectToDatabase()
+            val connection = connectToDatabase()
+            if (connection != null) {
+                // DB에서 조회한 팔로워 or 팔로잉 정보를 리스트로 가져오기
+                val users = getAllFollowList(connection)
 
-                if (connection != null) {
-                    connection.use { connection ->
-                        // DB에서 조회한 팔로워 or 팔로잉 정보를 리스트로 가져오기
-                        val users = getAllFollowList(connection)
-
-                        // UI 업데이트를 메인 스레드에서 수행
-                        withContext(Dispatchers.Main) {
-                            follows.clear()
-                            follows.addAll(users)
-
-                            // 팔로워 or 팔로잉 리스트로 리사이클러뷰 데이터 초기화
-                            initFollowRv()
-                        }
-                    }
-                } else {
-                    Log.d("Database", "Failed to connect to the database.")
+                // UI 업데이트를 메인 스레드에서 수행
+                withContext(Dispatchers.Main) {
+                    follows.clear()
+                    follows.addAll(users)
+                    // 팔로워 or 팔로잉 리스트로 리사이클러뷰 데이터 초기화
+                    initFollowRv()
+                    // 연결 닫기
+                    connection.close()
                 }
+            } else {
+                Log.d("Database", "Failed to connect to the database.")
             }
         }
     }
@@ -131,27 +134,26 @@ class FollowListFragment: Fragment() {
 
     private fun onClickFollowDeleteBtn(follow: Follow) {
         GlobalScope.launch(Dispatchers.IO) {
-            if (activity is MainActivity) {
-                val activity = activity as MainActivity
-                val connection = activity.connectToDatabase()
+            val connection = connectToDatabase()
 
-                if (connection != null) {
-                    deleteFollower(connection, follow.userId) { success ->
-                        if (success) {
-                            //TODO 삭제 성공 시 토스트 메시지 표시
-                            Log.d("FollowListFrag", "팔로우 삭제 성공")
-                        } else {
-                        }
-                        connection.close() // 연결 닫기
+            if (connection != null) {
+                deleteFollower(connection, follow.userId) { success ->
+                    if (success) {
+                        // 삭제 성공 시 토스트 메시지 표시
+                        Log.d("FollowListFrag", "팔로우 삭제 성공")
+                    } else {
+                        // 삭제 실패 시 토스트 메시지 표시
                     }
-                } else {
-                    Log.d("Database", "Failed to connect to the database.")
+                    // 연결 닫기
+                    connection.close()
                 }
+            } else {
+                Log.d("Database", "Failed to connect to the database.")
             }
         }
     }
 
-    fun deleteFollower(connection: Connection, followerId: Int, onDeleted: (Boolean) -> Unit) {
+    private fun deleteFollower(connection: Connection, followerId: Int, onDeleted: (Boolean) -> Unit) {
         // 나를 팔로워하는 사람 삭제 (나의 팔로워)
         val sql_my = String.format(resources.getString(R.string.query_delete_follower_my), userId, followerId)
         // 그 사람의 팔로잉에서 나를 삭제
