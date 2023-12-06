@@ -132,7 +132,7 @@ class FollowListFragment: Fragment() {
         }
     }
 
-    private fun onClickFollowDeleteBtn(follow: Follow, isFollowing: Boolean) {
+    private fun onClickFollowDeleteBtn(follow: Follow, isFollowing: Boolean, isCancle: Boolean) {
         GlobalScope.launch(Dispatchers.IO) {
             val connection = connectToDatabase()
             if (connection != null) {
@@ -147,13 +147,23 @@ class FollowListFragment: Fragment() {
                         // 연결 닫기
                         connection.close()
                     }
-                } else { // 팔로잉 취소
-                    cancelFollowing(connection, follow.userId) { success ->
-                        if (success) {
-                            Log.d("FollowListFrag", "팔로잉 취소 성공, user_name: ${follow.userName}")
+                } else { // 팔로잉
+                    if (isCancle) { // 취소의 경우
+                        cancelFollowing(connection, follow.userId) { success ->
+                            if (success) {
+                                Log.d("FollowListFrag", "팔로잉 취소 성공, user_name: ${follow.userName}")
+                            }
+                            // 연결 닫기
+                            connection.close()
                         }
-                        // 연결 닫기
-                        connection.close()
+                    } else { // 팔로우를 다시 하는 경우 (재팔로우)
+                        setFollowing(connection, follow.userId) { success ->
+                            if (success) {
+                                Log.d("FollowListFrag", "재팔로우 성공, user_name: ${follow.userName}")
+                            }
+                            // 연결 닫기
+                            connection.close()
+                        }
                     }
                 }
             } else {
@@ -209,6 +219,29 @@ class FollowListFragment: Fragment() {
         }
     }
 
+    private fun setFollowing(connection: Connection, followingId: Int, onSuccess: (Boolean) -> Unit) {
+        // 내가 팔로우
+        val sql_my = String.format(resources.getString(R.string.query_insert_following_my), userId, followingId)
+        // 그 사람의 팔로워에 나를 추가
+        val sql_other = String.format(resources.getString(R.string.query_insert_following_other), userId, followingId)
+
+        try {
+            val statement = connection.createStatement()
+
+            // 첫 번째 DELETE 쿼리 실행
+            val rowsAffectedMy = statement.executeUpdate(sql_my)
+            // 두 번째 DELETE 쿼리 실행
+            val rowsAffectedOther = statement.executeUpdate(sql_other)
+
+            // 양쪽 모두에서 영향을 받은 행(row)이 존재하면 성공으로 간주
+            onSuccess(rowsAffectedMy > 0 && rowsAffectedOther > 0)
+        } catch (e: SQLException) {
+            println("An error occurred while executing the SQL query: \n$sql_my\n$sql_other")
+            println(e.message)
+            onSuccess(false)
+        }
+    }
+
     private fun initFollowRv() {
         // 리사이클러뷰 연결
         adapter = FollowRVAdapter(requireContext(), isFollower)
@@ -221,11 +254,11 @@ class FollowListFragment: Fragment() {
 
         // 아이템 버튼 클릭 동작 -> 팔로워 삭제 or 팔로잉 취소
         adapter.setMyItemClickListener(object : FollowRVAdapter.MyItemClickListener {
-            override fun onClickBtn(follow: Follow) {
+            override fun onClickBtn(follow: Follow, isCancle: Boolean) {
                 val followString = if (isFollower) "팔로워" else "팔로잉"
                 //TODO: 팔로잉, 팔로우 취소 DB delete 구현
 //                Toast.makeText(requireContext(), "$followString 탭 - ${follow.userName}", Toast.LENGTH_SHORT).show()
-                onClickFollowDeleteBtn(follow, isFollower)
+                onClickFollowDeleteBtn(follow, isFollower, isCancle)
             }
         })
     }

@@ -22,6 +22,9 @@ WHERE u.user_id = %d;</string>
     // 팔로잉 취소
     <string name="query_delete_following_my">DELETE FROM following WHERE user_id = %1$d AND following_id = %2$d;</string>
     <string name="query_delete_following_other">DELETE FROM following WHERE user_id = %2$d AND following_id = %1$d;</string>
+    // 팔로잉 (팔로우하기)
+    <string name="query_insert_following_my">INSERT INTO following VALUES (%1$d, %2$d);</string>
+    <string name="query_insert_following_other">INSERT INTO follower VALUES (%2$d, %1$d);</string>
 
     // 비밀번호 변경
     <string name="query_update_password">UPDATE user SET password = \'%1$s\' WHERE password = \'%2$s\' AND user_id = %3$d;</string>

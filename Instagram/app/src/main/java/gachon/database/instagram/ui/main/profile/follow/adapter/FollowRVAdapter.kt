@@ -18,7 +18,7 @@ class FollowRVAdapter(val context: Context, val isFollower: Boolean) : RecyclerV
 
     interface MyItemClickListener {
         //TODO: 일단 다 취소하는 경우
-        fun onClickBtn(follow: Follow) // 버튼 상태 변경 및 targetId 반환
+        fun onClickBtn(follow: Follow, isCancle: Boolean) // 버튼 상태 변경 및 targetId 반환
 //        fun onRemoveSong(followerId: Int) // 찐 아이템 삭제 진행 (팔로워 삭제의 경우)
     }
 
@@ -65,7 +65,7 @@ class FollowRVAdapter(val context: Context, val isFollower: Boolean) : RecyclerV
             if (isFollower) { /* 팔로워: (회색) 삭제 -> 아이템이 바로 사라짐 */
                 binding.itemFollowFollowerBtn.setOnClickListener {
                     // 일단 아이템 클릭 -> 팔로워 정보 반환
-                    mItemClickListener.onClickBtn(users[position])
+                    mItemClickListener.onClickBtn(users[position], true)
                     // 팔로워의 삭제는 클릭하면 바로 삭제 (+ '삭제됨' 토스트 메시지)
                     removeItem(position)
                 }
@@ -79,7 +79,7 @@ class FollowRVAdapter(val context: Context, val isFollower: Boolean) : RecyclerV
                     // 버튼 색 바꿔주기
                     changeFollowingBtn(binding.itemFollowFollowingBtn, isFollowing)
                     // 일단 아이템 클릭 -> 팔로잉 정보 반환
-                    mItemClickListener.onClickBtn(users[position])
+                    mItemClickListener.onClickBtn(users[position], isFollowing)
                 }
             }
         }
