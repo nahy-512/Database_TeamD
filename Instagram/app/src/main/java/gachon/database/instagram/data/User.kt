@@ -6,9 +6,10 @@ data class User (
     val password: String,
     val name: String,
     val email: String,
+    val profileImage: String,
 //    val birthday: LocalDateTime,
 //    val gender: String,
-//    val introduction: String
+    val introduction: String
 )
 
 data class LoginUser(
@@ -16,11 +17,13 @@ data class LoginUser(
     val userName: String,
     val name: String?,
     val followerCnt: Int,
-    val followingCnt: Int
+    val followingCnt: Int,
+    val profileImage: String
 )
 
 data class Follow (
     val userId: Int,
     val userName: String,
-    val name: String
+    val name: String,
+    val profileImage: String?
 )

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import gachon.database.instagram.R
 import gachon.database.instagram.data.Follow
@@ -110,6 +111,7 @@ class ProfileFragment: Fragment() {
             profileNameTv.text = user.name
             profileFollowerNumTv.text = user.followerCnt.toString()
             profileFollowingNumTv.text = user.followingCnt.toString()
+            Glide.with(requireContext()).load(user.profileImage).error(R.drawable.ic_profile_default).into(profileIv)
         }
     }
 
@@ -152,13 +154,14 @@ class ProfileFragment: Fragment() {
             // SQL SELECT 쿼리를 실행하고, 조회 결과를 테이블 형식의 데이터인 ResultSet 객체에 저장함
             val resultSet = statement.executeQuery(sql)
 
-            var user = LoginUser(userId, "", "", 0, 0)
+            var user = LoginUser(userId, "", "", 0, 0, "")
             while (resultSet.next()) { // 조회 결과를 한줄 한줄 받아옴
                 val userName = resultSet.getString("user_name")
                 val name = resultSet.getString("name")
                 val followingNum = resultSet.getInt("following_count")
                 val followerNum = resultSet.getInt("follower_count")
-                user = LoginUser(userId, userName, name, followerNum, followingNum)
+                val profileImage = resultSet.getString("profileImage_url")
+                user = LoginUser(userId, userName, name, followerNum, followingNum, profileImage)
                 Log.d("ProfileFrag", "로그인 한 유저 정보: $user")
             }
 

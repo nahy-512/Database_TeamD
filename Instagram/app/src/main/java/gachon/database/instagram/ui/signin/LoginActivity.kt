@@ -115,14 +115,15 @@ class LoginActivity : AppCompatActivity() {
             // SQL SELECT 쿼리를 실행하고, 조회 결과를 테이블 형식의 데이터인 ResultSet 객체에 저장함
             val resultSet = statement.executeQuery(sql)
 
-            var user = LoginUser(0, "", "", 0, 0)
+            var user = LoginUser(0, "", "", 0, 0, "")
             while (resultSet.next()) { // 조회 결과를 한줄 한줄 받아옴
                 val id = resultSet.getInt("user_id")
                 val userName = resultSet.getString("user_name")
                 val name = resultSet.getString("name")
                 val followerNum = resultSet.getInt("follower_count")
                 val followingNum = resultSet.getInt("following_count")
-                user = LoginUser(id, userName, name, followerNum, followingNum)
+                val profileImage = resultSet.getString("profileImage_url")
+                user = LoginUser(id, userName, name, followerNum, followingNum, profileImage)
             }
 
             user

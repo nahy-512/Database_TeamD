@@ -117,8 +117,9 @@ class FollowListFragment: Fragment() {
                 val id = resultSet.getInt("user_id")
                 val userName = resultSet.getString("user_name")
                 val name = resultSet.getString("name")
+                val profileImage = resultSet.getString("profileImage_url")
                 // 한 유저(팔로워, 팔로잉) 인스턴스에 받아온 필드를 차례대로 넣어줌
-                val user = Follow(id, userName, name)
+                val user = Follow(id, userName, name, profileImage)
                 // 리스트에 위에서 받아온 유저 정보를 추가해줌
                 follows.add(user)
             }

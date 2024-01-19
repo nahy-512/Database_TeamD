@@ -32,17 +32,10 @@ class SignupFinishActivity : AppCompatActivity() {
     }
 
     private fun initClickListener() {
-        // 개인정보 설정
         binding.signupFinishNextBtn.setOnClickListener {
-            val nextIntent = Intent(this, LoginActivity::class.java)
-            userName = intent.getStringExtra("user_name").toString()
-            password = intent.getStringExtra("password").toString()
-            nextIntent.putExtra("user_name", userName)
-            nextIntent.putExtra("password", password)
-            insertDatabaseData()
-            // 화면 이동
             Toast.makeText(this, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
-            startActivity(nextIntent)
+            // 화면 이동
+            startActivity(Intent(this, LoginActivity::class.java))
             // 스택에 쌓여있는 회원가입 액티비티들을 모두 종료
             finishAffinity()
         }

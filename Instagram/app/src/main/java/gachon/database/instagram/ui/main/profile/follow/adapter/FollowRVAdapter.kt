@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import gachon.database.instagram.R
 import gachon.database.instagram.data.Follow
 import gachon.database.instagram.databinding.ItemFollowBinding
@@ -92,6 +93,9 @@ class FollowRVAdapter(val context: Context, val isFollower: Boolean) : RecyclerV
         fun bind(follower: Follow) {
             binding.itemFollowUserNameTv.text = follower.userName
             binding.itemFollowNameTv.text = follower.name
+            if (follower.profileImage?.isNotEmpty() == true) {
+                Glide.with(context).load(follower.profileImage).error(R.drawable.ic_profile_default).into(binding.itemFollowProfileIv)
+            }
 
             // 팔로워냐 팔로잉이냐에 따라 버튼을 다르게 구분해줌
             if (isFollower) {
