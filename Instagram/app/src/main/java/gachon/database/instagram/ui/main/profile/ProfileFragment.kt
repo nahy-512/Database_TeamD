@@ -174,6 +174,7 @@ class ProfileFragment: Fragment() {
         }
     }
 
+    // 프로필 -> 프로필 편집 화면으로 이동
     private fun moveToEditActivity() {
         val intent = Intent(activity, ProfileEditActivity::class.java)
 

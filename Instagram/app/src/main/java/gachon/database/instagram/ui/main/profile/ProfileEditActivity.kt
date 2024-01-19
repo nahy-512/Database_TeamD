@@ -25,7 +25,7 @@ class ProfileEditActivity : AppCompatActivity() {
 
     private fun initClickListener() {
         // 닫기 버튼 클릭
-        binding.profileEditCloseIv.setOnClickListener {
+        binding.profileEditBackIv.setOnClickListener {
             finish() // 뒤로가기
         }
 

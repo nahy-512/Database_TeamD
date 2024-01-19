@@ -9,7 +9,8 @@ import gachon.database.instagram.R
 import gachon.database.instagram.data.LoginUser
 import gachon.database.instagram.databinding.ActivityLoginBinding
 import gachon.database.instagram.ui.main.MainActivity
-import gachon.database.instagram.ui.signup.SignupUserNameActivity
+import gachon.database.instagram.ui.signup.SignupActivity
+import gachon.database.instagram.ui.signup.SignupUserNameFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -41,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         /* 새 계정 만들기 버튼 클릭 */
         binding.loginMakeNewAccountBtn.setOnClickListener {
             // 회원 가입 화면으로 이동
-            startActivity(Intent(this, SignupUserNameActivity::class.java))
+            startActivity(Intent(this, SignupActivity::class.java))
         }
     }
 

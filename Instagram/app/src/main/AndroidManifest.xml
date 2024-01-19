@@ -21,9 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.signin.LoginActivity"/>
-        <activity android:name=".ui.signup.SignupUserNameActivity"/>
-        <activity android:name=".ui.signup.SignupPWActivity"/>
-        <activity android:name=".ui.signup.SignupFinishActivity"/>
+        <activity android:name=".ui.signup.SignupActivity"/>
         <activity android:name=".ui.main.MainActivity"/>
         <activity android:name="gachon.database.instagram.ui.main.profile.ProfileEditActivity"/>
         <activity android:name=".ui.main.profile.EditPasswordActivity"
