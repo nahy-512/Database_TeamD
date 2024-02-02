@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import gachon.database.instagram.R
 import gachon.database.instagram.databinding.FragmentSignupFinishBinding
 import kotlinx.coroutines.Dispatchers
@@ -39,12 +40,11 @@ class SignupFinishFragment : Fragment() {
     }
 
     private fun initClickListener() {
-        binding.signupFinishNextBtn.setOnClickListener {
-//            insertDatabaseData()
+        // 회원가입 완료 (Fragment -> Activity)
+        binding.signupFinishBtn.setOnClickListener {
+            insertDatabaseData()
             Toast.makeText(requireContext(), "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
-//            // 화면 이동
-//            startActivity(Intent(activity, LoginActivity::class.java))
-            // 스택에 쌓여있는 회원가입 화면을 모두 종료
+            // 스택에 쌓여있는 회원가입 화면을 모두 없애고 화면 이동
             Intent(requireActivity(), LoginActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
             }.also {

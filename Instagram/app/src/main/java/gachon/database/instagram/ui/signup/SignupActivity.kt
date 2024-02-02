@@ -16,6 +16,7 @@ class SignupActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        // 액티비티 안의 첫 프래그먼트 설정
         supportFragmentManager.beginTransaction()
             .replace(R.id.signup_frm, SignupUserNameFragment())
             .commitAllowingStateLoss()
