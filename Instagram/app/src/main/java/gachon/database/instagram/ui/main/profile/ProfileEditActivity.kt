@@ -2,8 +2,13 @@ package gachon.database.instagram.ui.main.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import gachon.database.instagram.R
+import gachon.database.instagram.data.LoginUser
 import gachon.database.instagram.databinding.ActivityProfileEditBinding
 import gachon.database.instagram.ui.signin.LoginActivity
 import kotlin.math.log
@@ -11,7 +16,9 @@ import kotlin.math.log
 class ProfileEditActivity : AppCompatActivity() {
     lateinit var binding: ActivityProfileEditBinding
 
+    private var gson: Gson = Gson()
     private var userName = ""
+//    private var user: LoginUser = LoginUser()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,11 +57,23 @@ class ProfileEditActivity : AppCompatActivity() {
     }
 
     private fun setInit() {
-        userName = intent.getStringExtra("user_name").toString()
-        // 값 넣어주기
-        with(binding) {
-            profileEditUserNameEt.setText(userName)
-            profileEditNameEt.setText(intent.getStringExtra("name"))
+        // intent가 넘어왔는지 확인
+        intent.getStringExtra("user")?.let { userJson ->
+
+            // 넘어왔다면 song 인스턴스에 gson 형태로 받아온 데이터를 넣어줌
+            val user = gson.fromJson(userJson, LoginUser::class.java)
+            Log.e("user", user.toString()) // 로그 확인
+
+            userName = user.userName
+
+            // 값 넣어주기
+            with(binding) {
+                profileEditNameEt.setText(user.name)
+                profileEditUserNameEt.setText(userName)
+                if (user.profileImage.isNotEmpty()) {
+                    Glide.with(baseContext).load(user.profileImage).error(R.drawable.ic_profile_default).into(profileEditImgIv)
+                }
+            }
         }
     }
 

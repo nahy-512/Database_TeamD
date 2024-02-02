@@ -31,6 +31,7 @@ class ProfileFragment: Fragment() {
     private lateinit var adapter: RecommendFollowRVAdapter
 
     private var userId: Int = 0
+    private lateinit var userInfo: LoginUser
 
     private var isShowRecommend = false
     private var recommends = ArrayList<Follow>()
@@ -132,18 +133,18 @@ class ProfileFragment: Fragment() {
 
             connectToDatabase()?.use { connection ->
                 // userId를 통해 조회한 유저 정보를 가져옴
-                val userInfo = getUserInfoById(connection)
+                userInfo = getUserInfoById(connection)
 
                 // UI 업데이트를 메인 스레드에서 수행
                 withContext(Dispatchers.Main) {
                     // 가져온 정보로 뷰를 업데이트
-                    userInfo?.let { initUserInfo(it) }
+                    initUserInfo(userInfo)
                 }
             }
         }
     }
 
-    fun getUserInfoById(connection: Connection): LoginUser? {
+    fun getUserInfoById(connection: Connection): LoginUser {
 
         // 쿼리 작성
         val sql = String.format(resources.getString(R.string.query_select_user_by_userId), userId)
@@ -170,7 +171,7 @@ class ProfileFragment: Fragment() {
             println("An error occurred while executing the SQL query: $sql")
             println(e.message)
 
-            return null
+            return userInfo
         }
     }
 
@@ -178,11 +179,10 @@ class ProfileFragment: Fragment() {
     private fun moveToEditActivity() {
         val intent = Intent(activity, ProfileEditActivity::class.java)
 
-        // 데이터 넣기
-        intent.apply {
-            this.putExtra("user_name", binding.profileUserNameTv.text.toString())
-            this.putExtra("name", binding.profileNameTv.text)
-        }
+        val gson = Gson()
+        val userJson = gson.toJson(userInfo)
+        intent.putExtra("user", userJson)
+
         // 화면 이동
         startActivity(intent)
     }
