@@ -9,7 +9,8 @@ import gachon.database.instagram.R
 import gachon.database.instagram.data.LoginUser
 import gachon.database.instagram.databinding.ActivityLoginBinding
 import gachon.database.instagram.ui.main.MainActivity
-import gachon.database.instagram.ui.signup.SignupUserNameActivity
+import gachon.database.instagram.ui.signup.SignupActivity
+import gachon.database.instagram.ui.signup.SignupUserNameFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -41,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         /* 새 계정 만들기 버튼 클릭 */
         binding.loginMakeNewAccountBtn.setOnClickListener {
             // 회원 가입 화면으로 이동
-            startActivity(Intent(this, SignupUserNameActivity::class.java))
+            startActivity(Intent(this, SignupActivity::class.java))
         }
     }
 
@@ -79,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
         Log.d("LoginActivity", "넘기기: $user")
         // 화면 이동
         startActivity(intent)
+        finish()
     }
 
     private fun getDatabaseData() {
@@ -114,14 +116,15 @@ class LoginActivity : AppCompatActivity() {
             // SQL SELECT 쿼리를 실행하고, 조회 결과를 테이블 형식의 데이터인 ResultSet 객체에 저장함
             val resultSet = statement.executeQuery(sql)
 
-            var user = LoginUser(0, "", "", 0, 0)
+            var user = LoginUser(0, "", "", 0, 0, "")
             while (resultSet.next()) { // 조회 결과를 한줄 한줄 받아옴
                 val id = resultSet.getInt("user_id")
                 val userName = resultSet.getString("user_name")
                 val name = resultSet.getString("name")
                 val followerNum = resultSet.getInt("follower_count")
                 val followingNum = resultSet.getInt("following_count")
-                user = LoginUser(id, userName, name, followerNum, followingNum)
+                val profileImage = resultSet.getString("profileImage_url")
+                user = LoginUser(id, userName, name, followerNum, followingNum, profileImage)
             }
 
             user

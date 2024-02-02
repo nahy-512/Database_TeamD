@@ -85,7 +85,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFragment(fragment: Fragment) {
-        // 이동할 Fragment 지정
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, fragment).commit()
     }
 
@@ -187,8 +186,10 @@ class MainActivity : AppCompatActivity() {
                 val password = resultSet.getString("password")
                 val name = resultSet.getString("name")
                 val email = resultSet.getString("email")
+                val introduction = resultSet.getString("introduction")
+                val profileImage = resultSet.getString("profileImage_url")
 
-                val user = User(id, userName, password, name, email)
+                val user = User(id, userName, password, name, email, profileImage, introduction)
                 users.add(user)
             }
 
