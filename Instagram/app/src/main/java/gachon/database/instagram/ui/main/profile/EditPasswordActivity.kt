@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import gachon.database.instagram.R
+import gachon.database.instagram.config.BaseActivity
 import gachon.database.instagram.databinding.ActivityEditPasswordBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -13,12 +14,10 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 
-class EditPasswordActivity : AppCompatActivity() {
-    lateinit var binding: ActivityEditPasswordBinding
+class EditPasswordActivity : BaseActivity<ActivityEditPasswordBinding>(ActivityEditPasswordBinding::inflate) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEditPasswordBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
@@ -47,18 +46,6 @@ class EditPasswordActivity : AppCompatActivity() {
     private fun setInit() {
         binding.editPasswordUserNameTv.text =
             getString(R.string.edit_password_user_name_tv, intent.getStringExtra("user_name"))
-    }
-
-    fun connectToDatabase(): Connection? {
-        val url = resources.getString(R.string.db_url)
-        val user = resources.getString(R.string.db_user)
-        val password = resources.getString(R.string.db_password)
-
-        return try {
-            DriverManager.getConnection(url, user, password)
-        } catch (e: SQLException) {
-            null
-        }
     }
 
     private fun checkPwdValidation(): Boolean {

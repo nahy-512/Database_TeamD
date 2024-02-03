@@ -5,18 +5,15 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import gachon.database.instagram.config.BaseActivity
 import gachon.database.instagram.databinding.ActivitySplashBinding
 import gachon.database.instagram.ui.main.MainActivity
 import gachon.database.instagram.ui.signin.LoginActivity
 
-class SplashActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivitySplashBinding
+class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivitySplashBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 

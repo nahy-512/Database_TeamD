@@ -8,25 +8,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayoutMediator
+import gachon.database.instagram.R
+import gachon.database.instagram.config.BaseFragment
 import gachon.database.instagram.databinding.FragmentFollowBinding
 import gachon.database.instagram.ui.main.MainActivity
 import gachon.database.instagram.ui.main.profile.follow.adapter.FollowVPAdapter
 
-class FollowFragment: Fragment() {
+class FollowFragment: BaseFragment<FragmentFollowBinding>(FragmentFollowBinding::bind, R.layout.fragment_follow) {
 
-    lateinit var binding: FragmentFollowBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentFollowBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initClickListener()
         setInit()
-
-        return binding.root
     }
 
     override fun onStart() {

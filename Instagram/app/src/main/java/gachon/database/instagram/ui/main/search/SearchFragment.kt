@@ -1,23 +1,15 @@
 package gachon.database.instagram.ui.main.search
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import gachon.database.instagram.R
+import gachon.database.instagram.config.BaseFragment
 import gachon.database.instagram.databinding.FragmentSearchBinding
 
-class SearchFragment: Fragment() {
+class SearchFragment: BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::bind, R.layout.fragment_search) {
 
-    lateinit var binding: FragmentSearchBinding
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
-        return binding.root
     }
-
 }

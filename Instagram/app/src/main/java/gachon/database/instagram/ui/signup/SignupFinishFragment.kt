@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import gachon.database.instagram.R
+import gachon.database.instagram.config.BaseFragment
 import gachon.database.instagram.databinding.FragmentSignupFinishBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -19,9 +20,7 @@ import java.sql.DriverManager
 import java.sql.SQLException
 import gachon.database.instagram.ui.signin.LoginActivity
 
-class SignupFinishFragment : Fragment() {
-
-    lateinit var binding: FragmentSignupFinishBinding
+class SignupFinishFragment : BaseFragment<FragmentSignupFinishBinding>(FragmentSignupFinishBinding::bind, R.layout.fragment_signup_finish) {
 
     private var userName = ""
     private var password = ""
@@ -31,7 +30,6 @@ class SignupFinishFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSignupFinishBinding.inflate(inflater, container, false)
 
         initClickListener()
         setInit()
@@ -64,19 +62,6 @@ class SignupFinishFragment : Fragment() {
     }
 
 
-    private fun connectToDatabase(): Connection? {
-        val url = resources.getString(R.string.db_url)
-        val user = resources.getString(R.string.db_user)
-        val password = resources.getString(R.string.db_password)
-
-        return try {
-            DriverManager.getConnection(url, user, password)
-        } catch (e: SQLException) {
-            null
-        }
-    }
-
-
     private fun insertDatabaseData() {
         GlobalScope.launch(Dispatchers.IO) {
 
@@ -92,7 +77,6 @@ class SignupFinishFragment : Fragment() {
             }
         }
     }
-
 
     private fun insertUserData(connection: Connection) {
 

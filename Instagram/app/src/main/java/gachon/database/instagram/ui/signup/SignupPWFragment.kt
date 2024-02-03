@@ -7,18 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import gachon.database.instagram.R
+import gachon.database.instagram.config.BaseFragment
 import gachon.database.instagram.databinding.FragmentSignupPwBinding
 
-class SignupPWFragment : Fragment() {
-
-    lateinit var binding: FragmentSignupPwBinding
+class SignupPWFragment : BaseFragment<FragmentSignupPwBinding>(FragmentSignupPwBinding::bind, R.layout.fragment_signup_pw) {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSignupPwBinding.inflate(inflater, container, false)
 
         initClickListener()
 
