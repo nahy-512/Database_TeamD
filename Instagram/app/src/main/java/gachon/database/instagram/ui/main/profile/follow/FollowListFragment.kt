@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import gachon.database.instagram.R
+import gachon.database.instagram.config.BaseFragment
 import gachon.database.instagram.data.Follow
 import gachon.database.instagram.databinding.FragmentFollowListBinding
 import gachon.database.instagram.ui.main.MainActivity
@@ -20,9 +21,8 @@ import kotlinx.coroutines.withContext
 import java.sql.Connection
 import java.sql.SQLException
 
-class FollowListFragment: Fragment() {
+class FollowListFragment: BaseFragment<FragmentFollowListBinding>(FragmentFollowListBinding::bind, R.layout.fragment_follow_list) {
 
-    lateinit var binding: FragmentFollowListBinding
     private lateinit var adapter: FollowRVAdapter
 
     /* isFollower이라면 팔로워 목록, 아니라면 팔로잉 목록 조회 */
@@ -40,15 +40,9 @@ class FollowListFragment: Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentFollowListBinding.inflate(inflater, container, false)
-
-        return binding.root
     }
 
     override fun onStart() {
@@ -66,14 +60,6 @@ class FollowListFragment: Fragment() {
 
         // 현재 로그인된 user_id 초기화
         userId = getUserId()
-    }
-
-    private fun connectToDatabase(): Connection? {
-        if (activity is MainActivity) {
-            val activity = activity as MainActivity
-            return activity.connectToDatabase()
-        }
-        return null
     }
 
     private fun getDatabaseData() {

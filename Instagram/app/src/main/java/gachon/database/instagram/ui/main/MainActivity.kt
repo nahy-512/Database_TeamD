@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import gachon.database.instagram.R
+import gachon.database.instagram.config.BaseActivity
 import gachon.database.instagram.data.User
 import gachon.database.instagram.databinding.ActivityMainBinding
 import gachon.database.instagram.ui.main.home.HomeFragment
@@ -20,12 +21,11 @@ import java.sql.SQLException
 import java.sql.Statement
 
 
-class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         // 가장 처음에 표시할 Fragment 설정 -> ProfileFragment
@@ -157,18 +157,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         thread.start()
-    }
-
-    fun connectToDatabase(): Connection? {
-        val url = resources.getString(R.string.db_url)
-        val user = resources.getString(R.string.db_user)
-        val password = resources.getString(R.string.db_password)
-
-        return try {
-            DriverManager.getConnection(url, user, password)
-        } catch (e: SQLException) {
-            null
-        }
     }
 
     fun getAllUsers(connection: Connection): List<User> {

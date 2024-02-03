@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import gachon.database.instagram.R
+import gachon.database.instagram.config.BaseActivity
 import gachon.database.instagram.data.LoginUser
 import gachon.database.instagram.databinding.ActivityLoginBinding
 import gachon.database.instagram.ui.main.MainActivity
@@ -18,14 +19,10 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 
-class LoginActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityLoginBinding
+class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityLoginBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
@@ -50,18 +47,6 @@ class LoginActivity : AppCompatActivity() {
         binding.loginBtn.setOnClickListener {
             // 로그인 버튼 클릭 시 DB 정보 조회
             getDatabaseData()
-        }
-    }
-
-    fun connectToDatabase(): Connection? {
-        val url = resources.getString(R.string.db_url)
-        val user = resources.getString(R.string.db_user)
-        val password = resources.getString(R.string.db_password)
-
-        return try {
-            DriverManager.getConnection(url, user, password)
-        } catch (e: SQLException) {
-            null
         }
     }
 

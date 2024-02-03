@@ -5,19 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import gachon.database.instagram.R
+import gachon.database.instagram.config.BaseFragment
 import gachon.database.instagram.databinding.FragmentReelsBinding
 
-class ReelsFragment: Fragment() {
+class ReelsFragment: BaseFragment<FragmentReelsBinding>(FragmentReelsBinding::bind, R.layout.fragment_reels) {
 
-    lateinit var binding: FragmentReelsBinding
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentReelsBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
 }

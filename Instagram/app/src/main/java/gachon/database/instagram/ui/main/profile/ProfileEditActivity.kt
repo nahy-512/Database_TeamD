@@ -8,13 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import gachon.database.instagram.R
+import gachon.database.instagram.config.BaseActivity
 import gachon.database.instagram.data.LoginUser
 import gachon.database.instagram.databinding.ActivityProfileEditBinding
 import gachon.database.instagram.ui.signin.LoginActivity
 import kotlin.math.log
 
-class ProfileEditActivity : AppCompatActivity() {
-    lateinit var binding: ActivityProfileEditBinding
+class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>(ActivityProfileEditBinding::inflate) {
 
     private var gson: Gson = Gson()
     private var userName = ""
@@ -22,7 +22,6 @@ class ProfileEditActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfileEditBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 

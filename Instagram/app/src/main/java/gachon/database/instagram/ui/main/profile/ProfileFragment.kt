@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import gachon.database.instagram.R
+import gachon.database.instagram.config.BaseFragment
 import gachon.database.instagram.data.Follow
 import gachon.database.instagram.data.LoginUser
 import gachon.database.instagram.databinding.FragmentProfileBinding
@@ -25,9 +26,8 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 
-class ProfileFragment: Fragment() {
+class ProfileFragment: BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::bind, R.layout.fragment_profile) {
 
-    lateinit var binding: FragmentProfileBinding
     private lateinit var adapter: RecommendFollowRVAdapter
 
     private var userId: Int = 0
@@ -36,19 +36,13 @@ class ProfileFragment: Fragment() {
     private var isShowRecommend = false
     private var recommends = ArrayList<Follow>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // 클릭 이벤트 정의
         initClickListener()
         // 초기 뷰 세팅
         setInit()
-
-        return binding.root
     }
 
     override fun onStart() {
@@ -113,18 +107,6 @@ class ProfileFragment: Fragment() {
             profileFollowerNumTv.text = user.followerCnt.toString()
             profileFollowingNumTv.text = user.followingCnt.toString()
             Glide.with(requireContext()).load(user.profileImage).error(R.drawable.ic_profile_default).into(profileIv)
-        }
-    }
-
-    fun connectToDatabase(): Connection? {
-        val url = resources.getString(R.string.db_url)
-        val user = resources.getString(R.string.db_user)
-        val password = resources.getString(R.string.db_password)
-
-        return try {
-            DriverManager.getConnection(url, user, password)
-        } catch (e: SQLException) {
-            null
         }
     }
 
